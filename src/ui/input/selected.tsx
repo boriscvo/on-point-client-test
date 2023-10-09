@@ -22,7 +22,7 @@ export function Selected({ value, onRemove }: Props) {
       {value.map((item, i) => {
         if (i >= INPUT_LIMIT) return
         return (
-          <RenderedValue>
+          <RenderedValue key={item.name}>
             <span>{item.name}</span>
             <InlneClose onClick={() => onRemove(item.id)} />
           </RenderedValue>

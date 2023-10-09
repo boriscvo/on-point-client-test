@@ -7,15 +7,26 @@ import { useTypehead } from "./use-typehead"
 type Props = {
   options: OptionUnit[]
   variant?: TypeheadVariant
+  isLoading?: boolean
+  isError?: boolean
+  searchStartFrom?: number
+  handleSearch: (search: string, isFilter: boolean) => void
 }
 
-export function Typehead({ options, variant = "single" }: Props) {
+export function Typehead({
+  options,
+  variant = "single",
+  isLoading,
+  isError,
+  searchStartFrom,
+  handleSearch,
+}: Props) {
   const {
     isFocused,
     isDropdownActive,
     selectedValue,
     search,
-    containerRef,
+    searchStartLimit,
     updateFocusIn,
     updateFocusOut,
     updateSelectedValue,
@@ -23,10 +34,12 @@ export function Typehead({ options, variant = "single" }: Props) {
   } = useTypehead({
     options,
     variant,
+    searchStartFrom,
+    handleSearch,
   })
 
   return (
-    <Container ref={containerRef} onBlur={updateFocusOut} tabIndex={1}>
+    <Container onBlur={updateFocusOut} tabIndex={1}>
       <Input
         label="States"
         search={search}
@@ -40,6 +53,9 @@ export function Typehead({ options, variant = "single" }: Props) {
         <Dropdown
           options={options}
           value={selectedValue}
+          isLoading={isLoading}
+          isError={isError}
+          searchStartLimit={searchStartLimit}
           updateValue={updateSelectedValue}
         />
       )}

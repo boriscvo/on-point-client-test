@@ -27,7 +27,7 @@ export function Input({
       <InputBox
         onChange={updateSearch}
         onFocus={handleFocus}
-        value={search}
+        value={isFocused ? search : ""}
         type="text"
       />
       <Label isFocused={isFocused || !!value?.length}>{label}</Label>

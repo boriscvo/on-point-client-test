@@ -35,3 +35,28 @@ export const Option = styled.div<{ isSelected: boolean }>`
     }
   `}
 `
+
+export const NoResultsText = styled.div`
+  padding: 13px 10px;
+  line-height: 1;
+`
+
+export const Spinner = styled.div`
+  margin: 4px auto;
+  text-align: center;
+  border: 4px solid;
+  border-top: 4px solid rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`

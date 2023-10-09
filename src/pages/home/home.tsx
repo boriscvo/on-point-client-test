@@ -3,7 +3,15 @@ import { Container, Title, Selection } from "./home.styled"
 import { useHome } from "./use-home"
 
 export function Home() {
-  const { options, typeheadVariant, updateTypeheadVariant } = useHome()
+  const {
+    statesData,
+    typeheadVariant,
+    isLoading,
+    isError,
+    searchStartFrom,
+    updateTypeheadVariant,
+    searchStates,
+  } = useHome()
 
   return (
     <Container>
@@ -29,7 +37,14 @@ export function Home() {
         />
         <label htmlFor="multi">Multiple values</label>
       </Selection>
-      <Typehead options={options} variant={typeheadVariant} />
+      <Typehead
+        options={statesData}
+        variant={typeheadVariant}
+        isLoading={isLoading}
+        isError={isError}
+        searchStartFrom={searchStartFrom}
+        handleSearch={searchStates}
+      />
     </Container>
   )
 }

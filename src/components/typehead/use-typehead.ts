@@ -1,18 +1,31 @@
-import { useState, useRef } from "react"
+import { useState, useMemo } from "react"
 import type { ChangeEvent, FocusEvent } from "react"
 import { OptionUnit, TypeheadVariant } from "../../global/types"
 
 type Args = {
   options: OptionUnit[]
   variant?: TypeheadVariant
+  searchStartFrom?: number
+  handleSearch: (search: string, isFilter: boolean) => void
 }
 
-export function useTypehead({ options, variant }: Args) {
+export function useTypehead({
+  options,
+  variant = "single",
+  searchStartFrom,
+  handleSearch,
+}: Args) {
   const [isFocused, setIsFocused] = useState(false)
   const [search, setSearch] = useState<string>("")
   const [selectedValue, setSelectedValue] = useState<OptionUnit[]>([])
   const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false)
-  const containerRef = useRef<HTMLDivElement>(null)
+
+  const searchStartLimit = useMemo(() => {
+    if (!searchStartFrom) {
+      return 0
+    }
+    return search.length < searchStartFrom ? searchStartFrom : 0
+  }, [searchStartFrom, search])
 
   const updateFocusIn = () => {
     setIsFocused(true)
@@ -23,20 +36,19 @@ export function useTypehead({ options, variant }: Args) {
     if (event.relatedTarget) {
       return
     }
-    setSearch("")
     setIsDropdownActive(false)
     setIsFocused(false)
   }
 
   const updateSelectedValue = (id: number) => {
-    const selectedOption = options.find((option) => option.id === id)
-    if (!selectedOption) return
-
     const optionToRemove = selectedValue.find((option) => option.id === id)
     if (optionToRemove) {
       setSelectedValue(selectedValue.filter((option) => option.id !== id))
       return
     }
+
+    const selectedOption = options.find((option) => option.id === id)
+    if (!selectedOption) return
 
     const optionToUpdate =
       variant === "single"
@@ -46,8 +58,14 @@ export function useTypehead({ options, variant }: Args) {
     setSelectedValue(optionToUpdate)
   }
 
+  const updateRemovedValue = (id: number) => {
+    setSelectedValue(selectedValue.filter((option) => option.id !== id))
+  }
+
   const updateSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value || "")
+    const key = event.target.value || ""
+    setSearch(key)
+    handleSearch(key, key.length > search.length)
   }
 
   return {
@@ -56,7 +74,8 @@ export function useTypehead({ options, variant }: Args) {
     isDropdownActive,
     selectedValue,
     search,
-    containerRef,
+    searchStartLimit,
+    updateRemovedValue,
     updateFocusIn,
     updateFocusOut,
     updateSelectedValue,
