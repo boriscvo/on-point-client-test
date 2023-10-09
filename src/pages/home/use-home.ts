@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TypeheadVariant } from "../global/types.ts"
+import { TypeheadVariant } from "../../global/types.ts"
 import { STATES } from "./states.ts"
 
 export function useHome() {

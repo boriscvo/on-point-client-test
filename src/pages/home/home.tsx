@@ -1,4 +1,4 @@
-import { Typehead } from "../components/typehead/typehead"
+import { Typehead } from "../../components/typehead/typehead"
 import { Container, Title, Selection } from "./home.styled"
 import { useHome } from "./use-home"
 
