@@ -4,7 +4,7 @@ import * as STATES from "./states.json"
 export const handler = [
   rest.get("https://bcvoro.me/names/", (req, res, ctx) => {
     return res(
-      ctx.delay(Math.random() * (800 - 100) + 100),
+      ctx.delay(Math.random() * (600 - 100) + 600), // Simulate network delay
       ctx.status(200),
       ctx.json({
         data: STATES.data

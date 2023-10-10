@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react"
 import { OptionUnit, TypeheadVariant } from "../../global/types.ts"
-
-const STATES_SEARCH_START = 2
-const STATES_SEARCH_LIMIT = 10
+import {
+  STATES_SEARCH_START,
+  STATES_SEARCH_LIMIT,
+} from "../../global/constants.ts"
 
 export function useHome() {
   const [typeheadVariant, setTypeheadVariant] =

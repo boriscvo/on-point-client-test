@@ -1,17 +1,8 @@
-import { OptionUnit, TypeheadVariant } from "../../global/types"
 import { Dropdown } from "../../ui/dropdown/dropdown"
 import { Input } from "../../ui/input/input"
 import { Container } from "./typehead.styled"
+import { TypeheadProps } from "./types"
 import { useTypehead } from "./use-typehead"
-
-type Props = {
-  options: OptionUnit[]
-  variant?: TypeheadVariant
-  isLoading?: boolean
-  isError?: boolean
-  searchStartFrom?: number
-  handleSearch: (search: string, isFilter: boolean) => void
-}
 
 export function Typehead({
   options,
@@ -20,7 +11,7 @@ export function Typehead({
   isError,
   searchStartFrom,
   handleSearch,
-}: Props) {
+}: TypeheadProps) {
   const {
     isFocused,
     isDropdownActive,

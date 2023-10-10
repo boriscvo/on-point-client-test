@@ -1,17 +1,7 @@
-import type { ChangeEvent } from "react"
-import { OptionUnit } from "../../global/types"
-import { Container, Label, InputBox } from "./input.styled"
-import { Selected } from "./selected"
-
-type Props = {
-  label: string
-  isFocused: boolean
-  search: string
-  value?: OptionUnit[]
-  updateSearch: (event: ChangeEvent<HTMLInputElement>) => void
-  handleFocus?: () => void
-  updateSelectedValue: (id: number) => void
-}
+import { Container, Label, InputBox, InlineClose } from "./input.styled"
+import { Selected } from "./components/selected"
+import { useInput } from "./use-input"
+import type { InputProps } from "./types"
 
 export function Input({
   label,
@@ -21,19 +11,34 @@ export function Input({
   updateSearch,
   updateSelectedValue,
   handleFocus,
-}: Props) {
+}: InputProps) {
+  const {
+    inputBoxValue,
+    isSearchActive,
+    isFocusedAndSelected,
+    isSelected,
+    inputRef,
+    handleSearchClear,
+    handleSearchChange,
+  } = useInput({
+    isFocused,
+    value,
+    search,
+    updateSearch,
+  })
+
   return (
     <Container>
       <InputBox
-        onChange={updateSearch}
+        ref={inputRef}
+        onChange={handleSearchChange}
         onFocus={handleFocus}
-        value={isFocused ? search : ""}
+        value={inputBoxValue}
         type="text"
       />
-      <Label isFocused={isFocused || !!value?.length}>{label}</Label>
-      {value && !isFocused && (
-        <Selected value={value} onRemove={updateSelectedValue} />
-      )}
+      <Label isFocused={isFocusedAndSelected}>{label}</Label>
+      {isSelected && <Selected value={value!} onRemove={updateSelectedValue} />}
+      {isSearchActive && <InlineClose onClick={handleSearchClear} />}
     </Container>
   )
 }

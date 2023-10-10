@@ -82,8 +82,9 @@ export const Counter = styled.span`
   user-select: none;
 `
 
-export const InlneClose = styled.div`
+export const InlineClose = styled.div`
   position: absolute;
+  display: flex;
   width: 20px;
   height: 100%;
   box-sizing: border-box;
@@ -94,10 +95,12 @@ export const InlneClose = styled.div`
   right: 0px;
   cursor: pointer;
   text-align: center;
+  z-index: 1;
   &:after {
     content: "\\d7";
     font-size: 1.4rem;
-    line-height: 1.2rem;
-    display: block;
+    width: 100%;
+    align-self: center;
+    margin-top: 1px;
   }
 `

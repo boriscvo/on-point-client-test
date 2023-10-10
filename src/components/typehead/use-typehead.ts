@@ -1,24 +1,23 @@
 import { useState, useMemo } from "react"
-import type { ChangeEvent, FocusEvent } from "react"
-import { OptionUnit, TypeheadVariant } from "../../global/types"
-
-type Args = {
-  options: OptionUnit[]
-  variant?: TypeheadVariant
-  searchStartFrom?: number
-  handleSearch: (search: string, isFilter: boolean) => void
-}
+import type { FocusEvent } from "react"
+import { OptionUnit } from "../../global/types"
+import { TypeheadProps } from "./types"
 
 export function useTypehead({
   options,
   variant = "single",
   searchStartFrom,
   handleSearch,
-}: Args) {
+}: Omit<TypeheadProps, "isloading" | "isError">) {
   const [isFocused, setIsFocused] = useState(false)
   const [search, setSearch] = useState<string>("")
   const [selectedValue, setSelectedValue] = useState<OptionUnit[]>([])
   const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false)
+
+  const dropTypeheadState = () => {
+    setIsDropdownActive(false)
+    setIsFocused(false)
+  }
 
   const searchStartLimit = useMemo(() => {
     if (!searchStartFrom) {
@@ -36,8 +35,7 @@ export function useTypehead({
     if (event.relatedTarget) {
       return
     }
-    setIsDropdownActive(false)
-    setIsFocused(false)
+    dropTypeheadState()
   }
 
   const updateSelectedValue = (id: number) => {
@@ -55,6 +53,10 @@ export function useTypehead({
         ? [selectedOption]
         : [...selectedValue, selectedOption]
 
+    if (variant === "single") {
+      dropTypeheadState()
+    }
+
     setSelectedValue(optionToUpdate)
   }
 
@@ -62,10 +64,9 @@ export function useTypehead({
     setSelectedValue(selectedValue.filter((option) => option.id !== id))
   }
 
-  const updateSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    const key = event.target.value || ""
-    setSearch(key)
-    handleSearch(key, key.length > search.length)
+  const updateSearch = (value: string = "") => {
+    setSearch(value)
+    handleSearch(value, value.length > search.length)
   }
 
   return {
