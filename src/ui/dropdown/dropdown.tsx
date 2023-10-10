@@ -1,14 +1,14 @@
-import { OptionUnit } from "../../global/types"
+import { OptionUnit, Status } from "../../global/types"
 import { ErrorState } from "./components/error"
 import { LoadingState } from "./components/loading"
 import { NoResults } from "./components/no-results"
 import { Container, Option } from "./dropdown.styled"
+import { useDropdown } from "./use-dropdown"
 
 type Props = {
   options: OptionUnit[]
   value?: OptionUnit[]
-  isLoading?: boolean
-  isError?: boolean
+  status?: Status
   searchStartLimit?: number
   updateValue: (id: number) => void
 }
@@ -17,22 +17,24 @@ export function Dropdown({
   options,
   searchStartLimit,
   value,
-  isLoading,
-  isError,
+  status,
   updateValue,
 }: Props) {
-  if (isLoading) {
+  const { isNoResults, noResultsText, getIsSelected } = useDropdown({
+    options,
+    searchStartLimit,
+    value,
+  })
+
+  if (status === "loading") {
     return <LoadingState />
   }
 
-  if (isError) {
+  if (status === "error") {
     return <ErrorState />
   }
 
-  if (!options.length || searchStartLimit) {
-    const noResultsText = searchStartLimit
-      ? `Please type at least ${searchStartLimit} characters to see results...` // TODO: Add singluar/plural distinction.
-      : undefined
+  if (isNoResults) {
     return <NoResults text={noResultsText} />
   }
 
@@ -40,9 +42,7 @@ export function Dropdown({
     <Container>
       {options.map((option) => (
         <Option
-          isSelected={
-            !!value?.find((selectedOption) => option.id === selectedOption.id)
-          } // TODO: Implement separate icon ui
+          isSelected={getIsSelected(option)} // TODO: Implement separate icon ui
           key={option.name}
           onClick={() => updateValue(option.id)}
         >

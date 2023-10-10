@@ -8,7 +8,7 @@ export function useTypehead({
   variant = "single",
   searchStartFrom,
   handleSearch,
-}: Omit<TypeheadProps, "isloading" | "isError">) {
+}: Omit<TypeheadProps, "isloading" | "isError" | "label">) {
   const [isFocused, setIsFocused] = useState(false)
   const [search, setSearch] = useState<string>("")
   const [selectedValue, setSelectedValue] = useState<OptionUnit[]>([])

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react"
-import { OptionUnit, TypeheadVariant } from "../../global/types.ts"
+import { OptionUnit, Status, TypeheadVariant } from "../../global/types.ts"
 import {
   STATES_SEARCH_START,
   STATES_SEARCH_LIMIT,
@@ -9,25 +9,23 @@ export function useHome() {
   const [typeheadVariant, setTypeheadVariant] =
     useState<TypeheadVariant>("single")
   const [statesData, setStatesData] = useState<OptionUnit[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isError, setIsError] = useState<boolean>(false)
+  const [status, setStatus] = useState<Status | undefined>()
 
   const updateTypeheadVariant = (variant: TypeheadVariant) => {
     setTypeheadVariant(variant)
   }
 
   const getStates = useCallback(async (search: string) => {
-    setIsLoading(true)
+    setStatus("loading")
     try {
       const response = await fetch(
         `https://bcvoro.me/names/?search=${search}&limit=${STATES_SEARCH_LIMIT}`
       )
       const jsonResponse = await response.json()
       setStatesData(jsonResponse.data)
+      setStatus("success")
     } catch {
-      setIsError(true)
-    } finally {
-      setIsLoading(false)
+      setStatus("error")
     }
   }, [])
 
@@ -52,8 +50,7 @@ export function useHome() {
 
   return {
     statesData,
-    isLoading,
-    isError,
+    status,
     typeheadVariant,
     searchStartFrom: STATES_SEARCH_START,
     getStates,

@@ -1,10 +1,10 @@
-import { OptionUnit, TypeheadVariant } from "../../global/types"
+import { OptionUnit, Status, TypeheadVariant } from "../../global/types"
 
 export type TypeheadProps = {
+  label: string
   options: OptionUnit[]
   variant?: TypeheadVariant
-  isLoading?: boolean
-  isError?: boolean
+  status?: Status
   searchStartFrom?: number
   handleSearch: (search: string, isFilter: boolean) => void
 }

@@ -6,8 +6,7 @@ export function Home() {
   const {
     statesData,
     typeheadVariant,
-    isLoading,
-    isError,
+    status,
     searchStartFrom,
     updateTypeheadVariant,
     searchStates,
@@ -40,8 +39,8 @@ export function Home() {
       <Typehead
         options={statesData}
         variant={typeheadVariant}
-        isLoading={isLoading}
-        isError={isError}
+        status={status}
+        label="States"
         searchStartFrom={searchStartFrom}
         handleSearch={searchStates}
       />

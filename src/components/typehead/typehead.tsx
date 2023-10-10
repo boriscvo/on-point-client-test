@@ -5,10 +5,10 @@ import { TypeheadProps } from "./types"
 import { useTypehead } from "./use-typehead"
 
 export function Typehead({
+  label,
   options,
   variant = "single",
-  isLoading,
-  isError,
+  status,
   searchStartFrom,
   handleSearch,
 }: TypeheadProps) {
@@ -32,7 +32,7 @@ export function Typehead({
   return (
     <Container onBlur={updateFocusOut} tabIndex={1}>
       <Input
-        label="States"
+        label={label}
         search={search}
         value={selectedValue}
         isFocused={isFocused}
@@ -44,8 +44,7 @@ export function Typehead({
         <Dropdown
           options={options}
           value={selectedValue}
-          isLoading={isLoading}
-          isError={isError}
+          status={status}
           searchStartLimit={searchStartLimit}
           updateValue={updateSelectedValue}
         />
