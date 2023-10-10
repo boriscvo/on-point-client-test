@@ -8,7 +8,9 @@ export function Home() {
     typeheadVariant,
     status,
     searchStartFrom,
+    selectedState,
     updateTypeheadVariant,
+    updateSelectedState,
     searchStates,
   } = useHome()
 
@@ -37,12 +39,14 @@ export function Home() {
         <label htmlFor="multi">Multiple values</label>
       </Selection>
       <Typehead
+        label="States"
         options={statesData}
         variant={typeheadVariant}
         status={status}
-        label="States"
+        selectedValue={selectedState}
         searchStartFrom={searchStartFrom}
         handleSearch={searchStates}
+        handleSelectedUpdate={updateSelectedState}
       />
     </Container>
   )

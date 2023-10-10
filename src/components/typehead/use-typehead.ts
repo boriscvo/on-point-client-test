@@ -1,17 +1,17 @@
 import { useState, useMemo } from "react"
 import type { FocusEvent } from "react"
-import { OptionUnit } from "../../global/types"
 import { TypeheadProps } from "./types"
 
 export function useTypehead({
   options,
   variant = "single",
   searchStartFrom,
+  selectedValue,
   handleSearch,
+  handleSelectedUpdate,
 }: Omit<TypeheadProps, "isloading" | "isError" | "label">) {
   const [isFocused, setIsFocused] = useState(false)
   const [search, setSearch] = useState<string>("")
-  const [selectedValue, setSelectedValue] = useState<OptionUnit[]>([])
   const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false)
 
   const dropTypeheadState = () => {
@@ -41,7 +41,7 @@ export function useTypehead({
   const updateSelectedValue = (id: number) => {
     const optionToRemove = selectedValue.find((option) => option.id === id)
     if (optionToRemove) {
-      setSelectedValue(selectedValue.filter((option) => option.id !== id))
+      handleSelectedUpdate(selectedValue.filter((option) => option.id !== id))
       return
     }
 
@@ -57,11 +57,7 @@ export function useTypehead({
       dropTypeheadState()
     }
 
-    setSelectedValue(optionToUpdate)
-  }
-
-  const updateRemovedValue = (id: number) => {
-    setSelectedValue(selectedValue.filter((option) => option.id !== id))
+    handleSelectedUpdate(optionToUpdate)
   }
 
   const updateSearch = (value: string = "") => {
@@ -76,7 +72,6 @@ export function useTypehead({
     selectedValue,
     search,
     searchStartLimit,
-    updateRemovedValue,
     updateFocusIn,
     updateFocusOut,
     updateSelectedValue,

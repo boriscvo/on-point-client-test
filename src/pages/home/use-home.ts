@@ -9,10 +9,15 @@ export function useHome() {
   const [typeheadVariant, setTypeheadVariant] =
     useState<TypeheadVariant>("single")
   const [statesData, setStatesData] = useState<OptionUnit[]>([])
+  const [selectedState, setSelectedState] = useState<OptionUnit[]>([])
   const [status, setStatus] = useState<Status | undefined>()
 
   const updateTypeheadVariant = (variant: TypeheadVariant) => {
     setTypeheadVariant(variant)
+  }
+
+  const updateSelectedState = (state: OptionUnit[]) => {
+    setSelectedState(state)
   }
 
   const getStates = useCallback(async (search: string) => {
@@ -53,8 +58,10 @@ export function useHome() {
     status,
     typeheadVariant,
     searchStartFrom: STATES_SEARCH_START,
+    selectedState,
     getStates,
     searchStates,
     updateTypeheadVariant,
+    updateSelectedState,
   }
 }

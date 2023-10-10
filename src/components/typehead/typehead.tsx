@@ -10,12 +10,13 @@ export function Typehead({
   variant = "single",
   status,
   searchStartFrom,
+  selectedValue,
   handleSearch,
+  handleSelectedUpdate,
 }: TypeheadProps) {
   const {
     isFocused,
     isDropdownActive,
-    selectedValue,
     search,
     searchStartLimit,
     updateFocusIn,
@@ -26,7 +27,9 @@ export function Typehead({
     options,
     variant,
     searchStartFrom,
+    selectedValue,
     handleSearch,
+    handleSelectedUpdate,
   })
 
   return (
