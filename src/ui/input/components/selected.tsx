@@ -19,7 +19,7 @@ export function Selected({ value, onRemove }: Props) {
         if (i >= STATES_SEARCH_START) return
         return (
           <RenderedValue key={item.name}>
-            <span>{item.name}</span>
+            <span data-testid="preselected-input-value">{item.name}</span>
             <InlineClose onClick={() => onRemove(item.id)} />
           </RenderedValue>
         )

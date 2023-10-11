@@ -1,17 +1,9 @@
-import { OptionUnit, Status } from "../../global/types"
 import { ErrorState } from "./components/error"
 import { LoadingState } from "./components/loading"
 import { NoResults } from "./components/no-results"
 import { Container, Option } from "./dropdown.styled"
+import { DropdownProps } from "./types"
 import { useDropdown } from "./use-dropdown"
-
-type Props = {
-  options: OptionUnit[]
-  value?: OptionUnit[]
-  status?: Status
-  searchStartLimit?: number
-  updateValue: (id: number) => void
-}
 
 export function Dropdown({
   options,
@@ -19,7 +11,7 @@ export function Dropdown({
   value,
   status,
   updateValue,
-}: Props) {
+}: DropdownProps) {
   const { isNoResults, noResultsText, getIsSelected } = useDropdown({
     options,
     searchStartLimit,
@@ -39,10 +31,10 @@ export function Dropdown({
   }
 
   return (
-    <Container>
+    <Container data-testid="dropdown-ui">
       {options.map((option) => (
         <Option
-          isSelected={getIsSelected(option)} // TODO: Implement separate icon ui
+          $isSelected={getIsSelected(option)} // TODO: Implement separate icon ui
           key={option.name}
           onClick={() => updateValue(option.id)}
         >

@@ -11,7 +11,7 @@ export const handler = [
           .filter((state) =>
             state.name
               .toLowerCase()
-              .includes(req.url.searchParams.get("search") || "")
+              .includes(req.url.searchParams.get("search")?.toLowerCase() || "")
           )
           .slice(0, 10),
       })

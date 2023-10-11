@@ -36,7 +36,7 @@ export function Input({
         value={inputBoxValue}
         type="text"
       />
-      <Label isFocused={isFocusedAndSelected}>{label}</Label>
+      <Label $isFocused={isFocusedAndSelected}>{label}</Label>
       {isSelected && <Selected value={value!} onRemove={updateSelectedValue} />}
       {isSearchActive && <InlineClose onClick={handleSearchClear} />}
     </Container>

@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react"
 import type { FocusEvent } from "react"
-import { TypeheadProps } from "./types"
+import { TypeheadHookArgs, TypeheadHookReturn } from "./types"
 
 export function useTypehead({
   options,
@@ -9,7 +9,7 @@ export function useTypehead({
   selectedValue,
   handleSearch,
   handleSelectedUpdate,
-}: Omit<TypeheadProps, "isloading" | "isError" | "label">) {
+}: TypeheadHookArgs): TypeheadHookReturn {
   const [isFocused, setIsFocused] = useState(false)
   const [search, setSearch] = useState<string>("")
   const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false)

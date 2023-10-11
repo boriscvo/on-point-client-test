@@ -4,8 +4,9 @@ import {
   STATES_SEARCH_START,
   STATES_SEARCH_LIMIT,
 } from "../../global/constants.ts"
+import { HomeHookReturn } from "./types.ts"
 
-export function useHome() {
+export function useHome(): HomeHookReturn {
   const [typeheadVariant, setTypeheadVariant] =
     useState<TypeheadVariant>("single")
   const [statesData, setStatesData] = useState<OptionUnit[]>([])

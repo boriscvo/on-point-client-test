@@ -21,7 +21,7 @@ export const InputBox = styled.input`
   z-index: 1;
 `
 
-export const Label = styled.span<{ isFocused: boolean }>`
+export const Label = styled.span<{ $isFocused: boolean }>`
   position: absolute;
   top: ${PADDING.vertical}px;
   left: ${PADDING.horizontal}px;
@@ -30,8 +30,8 @@ export const Label = styled.span<{ isFocused: boolean }>`
   color: #000;
   user-select: none;
   transition: all 0.2s ease-in-out;
-  ${({ isFocused }) =>
-    isFocused &&
+  ${({ $isFocused }) =>
+    $isFocused &&
     css`
       z-index: 1;
       font-size: 0.9rem;

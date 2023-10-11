@@ -32,7 +32,7 @@ export function Home() {
           type="radio"
           id="multi"
           name="typehead_variant"
-          value="single"
+          value="multi"
           checked={typeheadVariant === "multi"}
           onChange={() => updateTypeheadVariant("multi")}
         />

@@ -33,7 +33,7 @@ export function Typehead({
   })
 
   return (
-    <Container onBlur={updateFocusOut} tabIndex={1}>
+    <Container onBlur={updateFocusOut} tabIndex={1} data-testid="input-box">
       <Input
         label={label}
         search={search}

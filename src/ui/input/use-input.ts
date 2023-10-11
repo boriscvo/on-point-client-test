@@ -1,12 +1,12 @@
 import { useCallback, useMemo, ChangeEvent, createRef } from "react"
-import type { InputProps } from "./types"
+import type { InputHookArgs, InputHookReturn } from "./types"
 
 export function useInput({
   isFocused,
   value,
   search,
   updateSearch,
-}: Omit<InputProps, "label" | "updateSelectedValue" | "handleFocus">) {
+}: InputHookArgs): InputHookReturn {
   const inputRef = createRef<HTMLInputElement>()
 
   const handleSearchChange = useCallback(

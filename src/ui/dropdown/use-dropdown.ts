@@ -1,15 +1,14 @@
 import { useMemo, useCallback } from "react"
 import { OptionUnit } from "../../global/types"
+import { DropdownHookArgs, DropdownHookReturn } from "./types"
 
-type Args = {
-  options: OptionUnit[]
-  value?: OptionUnit[]
-  searchStartLimit?: number
-}
-
-export function useDropdown({ options, searchStartLimit, value }: Args) {
+export function useDropdown({
+  options,
+  searchStartLimit,
+  value,
+}: DropdownHookArgs): DropdownHookReturn {
   const isNoResults = useMemo(
-    () => !options.length || searchStartLimit,
+    () => !!(!options.length || searchStartLimit),
     [options, searchStartLimit]
   )
   const noResultsText = useMemo(() => {

@@ -10,7 +10,7 @@ export const Container = styled.div`
   user-select: none;
 `
 
-export const Option = styled.div<{ isSelected: boolean }>`
+export const Option = styled.div<{ $isSelected: boolean }>`
   padding: 0.5rem 0.75rem;
   cursor: pointer;
   &:not(:last-child) {
@@ -19,8 +19,8 @@ export const Option = styled.div<{ isSelected: boolean }>`
   &:hover {
     background: #f0f0f0;
   }
-  ${({ isSelected }) =>
-    isSelected &&
+  ${({ $isSelected }) =>
+    $isSelected &&
     `
     &::after {
       content: "";
