@@ -6,8 +6,11 @@ export type HomeHookReturn = {
   typeheadVariant: TypeheadVariant
   searchStartFrom: number
   selectedState: OptionUnit[]
+  statesToRender: string
+  shouldRenderStates: boolean
   getStates: (search: string) => Promise<void>
   searchStates: (search: string, isFilter: boolean) => Promise<void>
   updateTypeheadVariant: (variant: TypeheadVariant) => void
   updateSelectedState: (state: OptionUnit[]) => void
+  handleStatesToRender: () => void
 }

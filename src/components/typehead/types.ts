@@ -21,6 +21,7 @@ export type TypeheadHookReturn = {
   selectedValue: OptionUnit[]
   search: string
   searchStartLimit?: number
+  typeheadRef: React.RefObject<HTMLDivElement>
   updateFocusIn: () => void
   updateFocusOut: (event: FocusEvent<HTMLInputElement>) => void
   updateSelectedValue: (id: number) => void

@@ -6,12 +6,30 @@ import {
 } from "../../global/constants.ts"
 import { HomeHookReturn } from "./types.ts"
 
+const StatesToRenderPlaceholder = "No states selected."
+
 export function useHome(): HomeHookReturn {
   const [typeheadVariant, setTypeheadVariant] =
     useState<TypeheadVariant>("single")
   const [statesData, setStatesData] = useState<OptionUnit[]>([])
   const [selectedState, setSelectedState] = useState<OptionUnit[]>([])
   const [status, setStatus] = useState<Status | undefined>()
+  const [statesToRender, setStatesToRender] = useState<string>(
+    StatesToRenderPlaceholder
+  )
+  const [shouldRenderStates, setShouldRenderStates] = useState<boolean>(false)
+
+  const handleStatesToRender = useCallback(() => {
+    setShouldRenderStates(true)
+    if (selectedState.length) {
+      const states = `Selected states are: ${selectedState
+        .map((item) => item.name)
+        .join(", ")}.`
+      setStatesToRender(states)
+    } else {
+      setStatesToRender(StatesToRenderPlaceholder)
+    }
+  }, [selectedState])
 
   const updateTypeheadVariant = (variant: TypeheadVariant) => {
     setTypeheadVariant(variant)
@@ -60,9 +78,12 @@ export function useHome(): HomeHookReturn {
     typeheadVariant,
     searchStartFrom: STATES_SEARCH_START,
     selectedState,
+    statesToRender,
+    shouldRenderStates,
     getStates,
     searchStates,
     updateTypeheadVariant,
     updateSelectedState,
+    handleStatesToRender,
   }
 }

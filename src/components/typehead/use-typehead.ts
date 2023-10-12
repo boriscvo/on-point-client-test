@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo, createRef } from "react"
 import type { FocusEvent } from "react"
 import { TypeheadHookArgs, TypeheadHookReturn } from "./types"
 
@@ -13,6 +13,7 @@ export function useTypehead({
   const [isFocused, setIsFocused] = useState(false)
   const [search, setSearch] = useState<string>("")
   const [isDropdownActive, setIsDropdownActive] = useState<boolean>(false)
+  const typeheadRef = createRef<HTMLDivElement>()
 
   const dropTypeheadState = () => {
     setIsDropdownActive(false)
@@ -32,7 +33,7 @@ export function useTypehead({
   }
 
   const updateFocusOut = (event: FocusEvent<HTMLInputElement>) => {
-    if (event.relatedTarget) {
+    if (event.relatedTarget === typeheadRef.current) {
       return
     }
     dropTypeheadState()
@@ -72,6 +73,7 @@ export function useTypehead({
     selectedValue,
     search,
     searchStartLimit,
+    typeheadRef,
     updateFocusIn,
     updateFocusOut,
     updateSelectedValue,

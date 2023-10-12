@@ -13,3 +13,13 @@ export const Title = styled.h4`
 export const Selection = styled.div`
   margin-bottom: 30px;
 `
+
+export const Button = styled.button`
+  margin: 75px 0 6px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 2px solid #000;
+  background-color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+`

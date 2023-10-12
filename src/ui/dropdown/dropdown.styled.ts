@@ -1,9 +1,13 @@
 import { styled } from "styled-components"
 
 export const Container = styled.div`
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  z-index: 1;
   max-height: 280px;
   overflow-y: auto;
-  background: rgba(0, 0, 0, 0.05);
+  background: #f2f2f2;
   border: 1px solid #000;
   border-radius: 0 0 4px 4px;
   border-top: none;

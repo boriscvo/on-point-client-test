@@ -1,5 +1,5 @@
 import { Typehead } from "../../components/typehead/typehead"
-import { Container, Title, Selection } from "./home.styled"
+import { Container, Title, Selection, Button } from "./home.styled"
 import { useHome } from "./use-home"
 
 export function Home() {
@@ -9,9 +9,12 @@ export function Home() {
     status,
     searchStartFrom,
     selectedState,
+    statesToRender,
+    shouldRenderStates,
     updateTypeheadVariant,
     updateSelectedState,
     searchStates,
+    handleStatesToRender,
   } = useHome()
 
   return (
@@ -48,6 +51,8 @@ export function Home() {
         handleSearch={searchStates}
         handleSelectedUpdate={updateSelectedState}
       />
+      <Button onClick={handleStatesToRender}>Submit</Button>
+      {shouldRenderStates && <div>{statesToRender}</div>}
     </Container>
   )
 }
