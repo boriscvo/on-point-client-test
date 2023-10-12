@@ -18,7 +18,7 @@ Its state says it will consume data from outside.
 mitigation techniques you might use?
 - From my perspective - session expiration, timeout, logout... or, better say, the absence of it.
 - Then the attacks, XSS, CSRF, Session hijack if they're still a thing. And, since they're still mentioned
-in OWASP 10, which my current employeer makes me review every year, they seem to be.
+in OWASP 10, which my current employer makes me review every year, they seem to be.
 
 
 4. What are some advantages and disadvantages to using JWT for authorization and
@@ -42,7 +42,7 @@ and sometimes easily decode.
 - Ignore and leave browser console errors, even if they're harmless,
 - Ignoring security things,
 - When you trust server,
-- Ignoring race conditions for requests (which I think I did with my server mocks to some extend),
+- Ignoring race conditions for requests,
 - Using 'any' (TS)
 
 

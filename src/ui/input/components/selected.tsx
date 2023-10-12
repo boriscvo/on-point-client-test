@@ -1,4 +1,3 @@
-import { STATES_SEARCH_START } from "../../../global/constants.ts"
 import { OptionUnit } from "../../../global/types"
 import {
   Counter,
@@ -12,11 +11,13 @@ type Props = {
   onRemove: (id: number) => void
 }
 
+const MAX_SHOWN = 2
+
 export function Selected({ value, onRemove }: Props) {
   return (
     <SelectedValueContainer>
       {value.map((item, i) => {
-        if (i >= STATES_SEARCH_START) return
+        if (i >= MAX_SHOWN) return
         return (
           <RenderedValue key={item.name}>
             <span data-testid="preselected-input-value">{item.name}</span>
@@ -24,8 +25,8 @@ export function Selected({ value, onRemove }: Props) {
           </RenderedValue>
         )
       })}
-      {value.length > STATES_SEARCH_START && (
-        <Counter>+{value.length - STATES_SEARCH_START} more</Counter>
+      {value.length > MAX_SHOWN && (
+        <Counter>+{value.length - MAX_SHOWN} more</Counter>
       )}
     </SelectedValueContainer>
   )

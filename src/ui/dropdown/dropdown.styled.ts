@@ -12,6 +12,7 @@ export const Container = styled.div`
   border-radius: 0 0 4px 4px;
   border-top: none;
   user-select: none;
+  box-sizing: border-box;
 `
 
 export const Option = styled.div<{ $isSelected: boolean }>`

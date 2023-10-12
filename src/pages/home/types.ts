@@ -9,7 +9,7 @@ export type HomeHookReturn = {
   statesToRender: string
   shouldRenderStates: boolean
   getStates: (search: string) => Promise<void>
-  searchStates: (search: string, isFilter: boolean) => Promise<void>
+  searchStates: (search: string) => void
   updateTypeheadVariant: (variant: TypeheadVariant) => void
   updateSelectedState: (state: OptionUnit[]) => void
   handleStatesToRender: () => void

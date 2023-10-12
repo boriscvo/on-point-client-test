@@ -1,4 +1,4 @@
-import { useState, useMemo, createRef } from "react"
+import { useState, useMemo, createRef, useCallback } from "react"
 import type { FocusEvent } from "react"
 import { TypeheadHookArgs, TypeheadHookReturn } from "./types"
 
@@ -39,32 +39,38 @@ export function useTypehead({
     dropTypeheadState()
   }
 
-  const updateSelectedValue = (id: number) => {
-    const optionToRemove = selectedValue.find((option) => option.id === id)
-    if (optionToRemove) {
-      handleSelectedUpdate(selectedValue.filter((option) => option.id !== id))
-      return
-    }
+  const updateSelectedValue = useCallback(
+    (id: number) => {
+      const optionToRemove = selectedValue.find((option) => option.id === id)
+      if (optionToRemove) {
+        handleSelectedUpdate(selectedValue.filter((option) => option.id !== id))
+        return
+      }
 
-    const selectedOption = options.find((option) => option.id === id)
-    if (!selectedOption) return
+      const selectedOption = options.find((option) => option.id === id)
+      if (!selectedOption) return
 
-    const optionToUpdate =
-      variant === "single"
-        ? [selectedOption]
-        : [...selectedValue, selectedOption]
+      const optionToUpdate =
+        variant === "single"
+          ? [selectedOption]
+          : [...selectedValue, selectedOption]
 
-    if (variant === "single") {
-      dropTypeheadState()
-    }
+      if (variant === "single") {
+        dropTypeheadState()
+      }
 
-    handleSelectedUpdate(optionToUpdate)
-  }
+      handleSelectedUpdate(optionToUpdate)
+    },
+    [handleSelectedUpdate, options, selectedValue, variant]
+  )
 
-  const updateSearch = (value: string = "") => {
-    setSearch(value)
-    handleSearch(value, value.length > search.length)
-  }
+  const updateSearch = useCallback(
+    (value: string = "") => {
+      setSearch(value)
+      handleSearch(value)
+    },
+    [handleSearch]
+  )
 
   return {
     options,

@@ -8,7 +8,7 @@ export type TypeheadProps = {
   variant?: TypeheadVariant
   status?: Status
   searchStartFrom?: number
-  handleSearch: (search: string, isFilter: boolean) => void
+  handleSearch: (search: string) => void
   handleSelectedUpdate: (selected: OptionUnit[]) => void
 }
 
