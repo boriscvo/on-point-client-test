@@ -1,7 +1,7 @@
 import { OptionUnit, Status, TypeheadVariant } from "../../global/types.ts"
 
 export type HomeHookReturn = {
-  statesData: OptionUnit[]
+  statesData: OptionUnit[] | null
   status?: Status
   typeheadVariant: TypeheadVariant
   searchStartFrom: number

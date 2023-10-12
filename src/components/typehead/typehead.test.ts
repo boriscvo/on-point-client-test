@@ -5,16 +5,14 @@ import { TypeheadHookArgs, TypeheadHookReturn } from "./types"
 
 let selectedValue: OptionUnit[] = []
 let searchText = "Con"
-let isSearchFilter = false
 let hookResult: RenderHookResult<TypeheadHookReturn, TypeheadHookArgs>
 
 const setSelectedValue = (option: OptionUnit[]) => {
   selectedValue = option
 }
 
-const setSearchProps = (value: string, isFilter: boolean) => {
+const setSearchProps = (value: string) => {
   searchText = value
-  isSearchFilter = isFilter
 }
 
 const optionMocks = [
@@ -32,8 +30,8 @@ const initialProps = {
   options: optionMocks,
   variant: "single" as TypeheadVariant,
   selectedValue,
-  handleSearch: (search: string, isFilter: boolean) => {
-    setSearchProps(search, isFilter)
+  handleSearch: (search: string) => {
+    setSearchProps(search)
   },
   handleSelectedUpdate: (option: OptionUnit[]) => {
     setSelectedValue(option)
@@ -92,7 +90,6 @@ describe("Typehead component: test updateSelectedValue, 'multi' variant ", () =>
 describe("Typehead component: test updateSearch", () => {
   beforeEach(() => {
     searchText = ""
-    isSearchFilter = false
     hookResult = renderHook(useTypehead, {
       initialProps,
     })
@@ -101,7 +98,6 @@ describe("Typehead component: test updateSearch", () => {
   it("should update search handler", () => {
     act(() => hookResult.result.current.updateSearch("Connecticut"))
     expect(searchText).toEqual("Connecticut")
-    expect(isSearchFilter).toEqual(true)
     expect(hookResult.result.current.search).toEqual("Connecticut")
   })
 })

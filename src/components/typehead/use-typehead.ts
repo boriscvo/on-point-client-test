@@ -47,7 +47,7 @@ export function useTypehead({
         return
       }
 
-      const selectedOption = options.find((option) => option.id === id)
+      const selectedOption = options?.find((option) => option.id === id)
       if (!selectedOption) return
 
       const optionToUpdate =

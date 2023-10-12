@@ -3,7 +3,7 @@ import { OptionUnit, Status, TypeheadVariant } from "../../global/types"
 
 export type TypeheadProps = {
   label: string
-  options: OptionUnit[]
+  options: OptionUnit[] | null
   selectedValue: OptionUnit[]
   variant?: TypeheadVariant
   status?: Status
@@ -15,7 +15,7 @@ export type TypeheadProps = {
 export type TypeheadHookArgs = Omit<TypeheadProps, "label" | "status">
 
 export type TypeheadHookReturn = {
-  options: OptionUnit[]
+  options: OptionUnit[] | null
   isFocused: boolean
   isDropdownActive: boolean
   selectedValue: OptionUnit[]

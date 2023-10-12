@@ -1,7 +1,7 @@
 import { OptionUnit, Status } from "../../global/types"
 
 export type DropdownProps = {
-  options: OptionUnit[]
+  options: OptionUnit[] | null
   value?: OptionUnit[]
   status?: Status
   searchStartLimit?: number
@@ -9,7 +9,7 @@ export type DropdownProps = {
 }
 
 export type DropdownHookArgs = {
-  options: OptionUnit[]
+  options: OptionUnit[] | null
   value?: OptionUnit[]
   searchStartLimit?: number
 }

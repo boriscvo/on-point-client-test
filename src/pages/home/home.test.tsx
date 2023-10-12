@@ -10,7 +10,7 @@ import {
 import { STATES_SEARCH_START } from "../../global/constants"
 import { handler } from "../../msw/handler"
 import { Home } from "./home"
-import { useHome } from "./use-home"
+import { useStates } from "./use-states"
 import { HomeHookReturn } from "./types"
 require("isomorphic-fetch")
 
@@ -35,11 +35,11 @@ describe("Home page: render", () => {
 
 describe("Home page: useHome", () => {
   beforeEach(() => {
-    hookResult = renderHook(useHome)
+    hookResult = renderHook(useStates)
   })
 
   it("should return correct initial values", () => {
-    expect(hookResult.result.current.statesData).toEqual([])
+    expect(hookResult.result.current.statesData).toEqual(null)
     expect(hookResult.result.current.selectedState).toEqual([])
     expect(hookResult.result.current.status).toEqual(undefined)
     expect(hookResult.result.current.typeheadVariant).toEqual("single")
@@ -47,22 +47,15 @@ describe("Home page: useHome", () => {
       STATES_SEARCH_START
     )
   })
-
-  it("should test searchStates", () => {
-    act(() => {
-      hookResult.result.current.getStates("Conn")
-      hookResult.result.current.searchStates("Conn", false)
-    })
-  })
 })
 
-describe("Home page: useHome fetch", () => {
+describe("Home page: useStates fetch", () => {
   beforeAll(() => server.listen())
   afterEach(() => server.resetHandlers())
   afterAll(() => server.close())
 
   it("should test getStates", async () => {
-    const { result } = renderHook(useHome)
+    const { result } = renderHook(useStates)
 
     await act(async () => {
       await result.current.getStates("ida")

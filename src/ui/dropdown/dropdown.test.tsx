@@ -47,7 +47,7 @@ describe("Dropdown component: useDropdown", () => {
     expect(hookResult.result.current.isNoResults).toEqual(false)
     expect(hookResult.result.current.noResultsText).toEqual(undefined)
     expect(
-      hookResult.result.current.getIsSelected(initialProps.options[0])
+      hookResult.result.current.getIsSelected(initialProps.options![0])
     ).toEqual(false)
   })
 
@@ -68,7 +68,7 @@ describe("Dropdown component: useDropdown", () => {
       value: [{ name: "Arizona", id: 3 }],
     })
     expect(
-      hookResult.result.current.getIsSelected(initialProps.options[2])
+      hookResult.result.current.getIsSelected(initialProps.options![2])
     ).toEqual(true)
   })
 })

@@ -1,6 +1,6 @@
 import { Typehead } from "../../components/typehead/typehead"
+import { useStates } from "./use-states"
 import { Container, Title, Selection, Button } from "./home.styled"
-import { useHome } from "./use-home"
 
 export function Home() {
   const {
@@ -15,7 +15,7 @@ export function Home() {
     updateSelectedState,
     searchStates,
     handleStatesToRender,
-  } = useHome()
+  } = useStates()
 
   return (
     <Container>

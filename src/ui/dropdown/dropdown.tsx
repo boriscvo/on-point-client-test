@@ -32,7 +32,7 @@ export function Dropdown({
 
   return (
     <Container data-testid="dropdown-ui">
-      {options.map((option) => (
+      {(options || []).map((option) => (
         <Option
           $isSelected={getIsSelected(option)} // TODO: Implement separate icon ui
           key={option.name}

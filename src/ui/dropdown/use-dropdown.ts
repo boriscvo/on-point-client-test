@@ -8,7 +8,7 @@ export function useDropdown({
   value,
 }: DropdownHookArgs): DropdownHookReturn {
   const isNoResults = useMemo(
-    () => !!(!options.length || searchStartLimit),
+    () => !!(!options?.length || searchStartLimit),
     [options, searchStartLimit]
   )
   const noResultsText = useMemo(() => {
