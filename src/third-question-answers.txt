@@ -1,0 +1,55 @@
+1. If you had control of the web-server, what are some ways you might implement a caching
+solution?
+- CDN if money and support isn't a problem,
+- Service Workers,
+- Basic browser caching I guess, with cache headers,
+- Caching static things like images,
+- Things like NGINX for content caching when server is out.
+
+
+2. How might you implement offline caching for your typeahead component?
+- Some similar things as from answer no 1, CDN and service workers, I suppose.
+- Maybe some local data source, if required data isn't too big. Cache-first logic. Not sure about this, though.
+This is more a topic for specific management of request rather then the component itself. 
+Its state says it will consume data from outside.
+
+
+3. When using traditional session cookies, what are the primary security concerns and
+mitigation techniques you might use?
+- From my perspective - session expiration, timeout, logout... or, better say, the absence of it.
+- Then the attacks, XSS, CSRF, Session hijack if they're still a thing. And, since they're still mentioned
+in OWASP 10, which my current employeer makes me review every year, they seem to be.
+
+
+4. What are some advantages and disadvantages to using JWT for authorization and
+authentication in a web application?
+
+* Good side:
+- Stateless and decentralized, no DB verification once it's out.
+- It's JSON or can be JSON.
+
+* Bad sides:
+- To my knowledge, it can't be revoked or cancelled easily. However, you can make it with short time expiry. 
+Which is per-se another con, potentially, since managing that process requires work.
+- They're client side, you can actually read it with access to the browser/client session
+and sometimes easily decode.
+
+
+5. What are all the ways you can think of to write BAD React code?
+- Copy/Paste cases, 
+- When you don't criticaly overview online help you've found,
+- Layer after layer after layer after... layer with no apparent reason,
+- Ignore and leave browser console errors, even if they're harmless,
+- Ignoring security things,
+- When you trust server,
+- Ignoring race conditions for requests (which I think I did with my server mocks to some extend),
+- Using 'any' (TS)
+
+
+6. What new Web or React APIs are you most excited about?
+- Excited? None whatsoever, but now since you're asking, I'll google to see what you mean by that. 
+- The last time I was excited about something new in React was when they released hooks, 
+which practically matched Functional and Class components, but that was, like, 2019.
+
+- Alright, I'll pick these "new" hooks introduced in 18. 
+- I also see they kicked out IE11 support, I like that too.
