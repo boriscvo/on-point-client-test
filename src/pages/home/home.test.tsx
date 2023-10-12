@@ -8,10 +8,10 @@ import {
   act,
 } from "@testing-library/react"
 import { STATES_SEARCH_START } from "../../global/constants"
+import { handler } from "../../msw/handler"
 import { Home } from "./home"
 import { useHome } from "./use-home"
 import { HomeHookReturn } from "./types"
-import { handler } from "../msw/handler"
 require("isomorphic-fetch")
 
 const server = setupServer(...handler)

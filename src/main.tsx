@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App.tsx"
-import { worker } from "./pages/msw/browser"
+import { worker } from "./msw/browser.ts"
 worker.start()
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
